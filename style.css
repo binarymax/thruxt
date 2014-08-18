@@ -1,0 +1,3 @@
+* { border-box:0;}
+body {margin:0;padding:0;overflow:hidden;background:#505;}
+.layer {position:absolute;margin:0;padding:0;top:0;left:0;}
