@@ -4,10 +4,7 @@
  *
  * Creature devaours ateroids, moons, planets, stars, galaxies
  * 
- * 
- * 
  * Lightears for speed/time.
- *
  *
  * Sounds are interpreted by Galaxy radiation
  *
@@ -18,7 +15,13 @@ var Thruxt = window.Thruxt = (function(thruxt){
 	thruxt = {};
 
 	thruxt.create = function() {
-		console.log(thruxt);
+		var container = $("#container");
+		var game = thruxt.Game();
+		container.appendChild( game.renderer.domElement );
+		game.load();
+	};
+
+	thruxt.load = function(){
 		var game = thruxt.Game();
 		game.load();
 	};
@@ -28,17 +31,13 @@ var Thruxt = window.Thruxt = (function(thruxt){
 	};
 
 	thruxt.save = function() {
-
+		thruxt.Game.save();
 	};
 
-	thruxt.load = function(){
-		var game = thruxt.Game();
-		game.load();
-	};
-
-	$.on("ready",function(){
+	thruxt.start = function(){
 		thruxt.create();
-	});
+		$.trigger("ready");
+	};
 
 	return thruxt;
 

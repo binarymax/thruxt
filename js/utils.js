@@ -3,11 +3,18 @@ var Thruxt = window.Thruxt; if(typeof Thruxt !== 'object' ) throw new Error("Thr
 (function(thruxt){
 	"use strict";
 
-	var _width   = thruxt.viewWidth  = window.innerWidth;
-	var _height  = thruxt.viewHeight = window.innerHeight;
+	var _width   = thruxt.width      = window.innerWidth;
+	var _height  = thruxt.height     = window.innerHeight;
 	var _centerx = thruxt.centerx    = _width>>1;
 	var _centery = thruxt.centery    = _height>>1;
-	var _360     = thruxt._360       = 2 * Math.PI;
+	var _tau     = thruxt.tau        = Math.PI * 2;
+	var _ratio   = thruxt.ratio      = _width/_height;
+	var _halfx   = thruxt.halfx      = _width / 2;
+	var _halfy   = thruxt.halfy      = _height / 2;
+
+	var _force  = thruxt.force     = 0.1;
+	var _theta  = thruxt.theta     = 1;
+
 
 	//------------------------------------------------------------------
 	//requestAnimationFrame
@@ -58,13 +65,22 @@ var Thruxt = window.Thruxt; if(typeof Thruxt !== 'object' ) throw new Error("Thr
 
 	//------------------------------------------------------------------	
 	//Converts a hex color to rgba
-	var hex2rgba = thruxt.hex2rgba = function(hex,alpha) {
+	var hex2rgba = thruxt.hex2rgba = function(hex) {
 		var r = parseInt(hex.substr(0,2),16).toString();
 		var g = parseInt(hex.substr(2,2),16).toString();
 		var b = parseInt(hex.substr(4,2),16).toString();
-		return "rgba("+r+","+g+","+b+","+alpha||"1.0"+")";
+		var a = hex.length>6?parseInt(hex.substr(4,2),16).toString():0.8;
+		return "rgba("+r+","+g+","+b+","+a+")";
 	}
 
+	//------------------------------------------------------------------	
+	//Converts a hex color to a three rgb color
+	var hex2three = thruxt.hex2three = function(hex) {
+		var r = parseInt(hex.substr(0,2),16).toString();
+		var g = parseInt(hex.substr(2,2),16).toString();
+		var b = parseInt(hex.substr(4,2),16).toString();
+		return [r/255,g/255,b/255];
+	}
 
 	//------------------------------------------------------------------	
 	//Converts 2d cartesian coordinates to a buffer offset

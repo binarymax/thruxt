@@ -21,32 +21,34 @@
 	<meta property="og:site_name" content="Thruxt"/>
 	<link rel="shortcut icon" href="http://binarymax.com/star.png" type="image/png" />
 	<link rel="image_src" href="http://binarymax.com/star200.png" />
-	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	
 </head>
 <body>
 	
-	<div id="layers"></div>
+	<div id="container"></div>
 	
 	<noscript>
 		<h2>This experiment requires javascript.</h2>
 		<p>If you would like to play, please enable javascript and try again.</p>
 	</noscript>
 
-	<script type="text/javascript" src="$.min.js"></script>
-	<script type="text/javascript" src="gl-matrix-min.js"></script>
-	<script type="text/javascript" src="thruxt.js"></script>
-	<script type="text/javascript" src="utils.js"></script>
-	<script type="text/javascript" src="sprite.js"></script>
-	<script type="text/javascript" src="layer.js"></script>
-	<script type="text/javascript" src="galaxy.js"></script>
-	<script type="text/javascript" src="universe.js"></script>
-	<script type="text/javascript" src="starfield.js"></script>
-	<script type="text/javascript" src="ship.js"></script>
-	<script type="text/javascript" src="game.js"></script>
-	<script type="text/javascript">
-		$.trigger("ready");
-	</script>
+	<script type="text/javascript" src="/js/three/three.min.js"></script>
+	<script type="text/javascript" src="/js/three/Detector.js"></script>
+	<script type="text/javascript" src="/js/three/libs/stats.min.js"></script>
+
+	<script type="text/javascript" src="/js/$.min.js"></script>
+	<script type="text/javascript" src="/js/thruxt.js"></script>
+	<script type="text/javascript" src="/js/utils.js"></script>
+	<script type="text/javascript" src="/js/controls.js"></script>
+	<script type="text/javascript" src="/js/sprite.js"></script>
+	<script type="text/javascript" src="/js/galaxy.js"></script>
+	<script type="text/javascript" src="/js/universe.js"></script>
+	<script type="text/javascript" src="/js/starfield.js"></script>
+	<script type="text/javascript" src="/js/ship.js"></script>
+	<script type="text/javascript" src="/js/camera.js"></script>
+	<script type="text/javascript" src="/js/game.js"></script>
+	<script type="text/javascript">Thruxt.start();</script>
 
 
 </body>
