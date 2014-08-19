@@ -20,6 +20,9 @@ Thruxt.Game = (function() {
 
 		//self.scene.position.set(0,0,1)
 
+		self.stats = new Stats();
+		$("#stats").appendChild( self.stats.domElement );
+
 
 	};
 
@@ -39,6 +42,8 @@ Thruxt.Game = (function() {
 		self.ship.position();
 
 		self.renderer.render( self.scene, camera.threecam );
+
+		self.stats.update();
 
 
 	};

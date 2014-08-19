@@ -17,6 +17,9 @@ Thruxt.Ship = (function() {
 
 		var layers = self.layers = [];
 
+		var group = self.group = new THREE.Object3D();
+
+
 		var map = THREE.ImageUtils.loadTexture( '/textures/clouds/turquois-opaque.jpg' );
 		map.wrapS = map.wrapT = THREE.RepeatWrapping;
 		map.anisotropy = 16;
@@ -24,7 +27,7 @@ Thruxt.Ship = (function() {
 		var material = new THREE.MeshLambertMaterial( { ambient: 0xbbbbbb, map: map, side: THREE.DoubleSide } );
 		self.layers.push(new THREE.Mesh( new THREE.SphereGeometry( 50, 40, 40 ), material ));
 		layers[0].position.set( x, y, z );
-		scene.add(layers[0]);
+		group.add(layers[0]);
 
 
 
@@ -36,7 +39,10 @@ Thruxt.Ship = (function() {
 		var material1 = new THREE.MeshBasicMaterial( { map: map1, blending: THREE.AdditiveBlending, depthTest: false, transparent: true } );
 		self.layers.push(new THREE.Mesh( new THREE.SphereGeometry( 55, 40, 40 ), material1 ));
 		layers[1].position.set( x, y, z );
-		scene.add(layers[1]);
+		group.add(layers[1]);
+
+
+		scene.add(group);
 
 
 		var light = self.light = new THREE.DirectionalLight( 0xffffff );
@@ -62,9 +68,10 @@ Thruxt.Ship = (function() {
 		var timer = Date.now() * 0.0001;
 		for(var i=0;i<layers.length;i++) {
 			layers[i].position.y += self.forcethrust;
-			layers[i].rotation.y = timer  * ((i * 1.5) || 1);
-			//layers[i].rotation.y -= self.thetathrust * ((i * 1.00005) || 1);
+			layers[i].rotation.y = timer  * ((i * 1.5) || 1) + self.thetathrust;;
+			
 		}
+		self.group.rotation.z += self.thetathrust;
 	}
 
 	var make = function(scene,x,y,z) {

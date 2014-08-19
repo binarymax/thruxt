@@ -26,7 +26,7 @@ Thruxt.Camera = (function() {
 	Camera.prototype.move = function(force) {
 		var self = this;
 		self.forcethrust+=force;
-		console.log(self.forcethrust);
+		//console.log(self.forcethrust);
 	};
 
 	Camera.prototype.position = function(force) {
@@ -34,7 +34,7 @@ Thruxt.Camera = (function() {
 		self.threecam.position.y += self.forcethrust;
 		self.threecam.rotation.z += self.thetathrust;
 
-		$.trigger("shipmove",self.threecam.position);
+		//$.trigger("shipmove",self.threecam.position);
 
 	};
 

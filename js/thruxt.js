@@ -37,6 +37,7 @@ var Thruxt = window.Thruxt = (function(thruxt){
 	thruxt.start = function(){
 		thruxt.create();
 		$.trigger("ready");
+
 	};
 
 	return thruxt;
