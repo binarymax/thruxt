@@ -1,19 +1,23 @@
 /* =================================================================================
  *
- * THRUXT - the galaxy eater
  *
- * Creature devaours ateroids, moons, planets, stars, galaxies
+ *
+ * THRUXT
+ *
+ * Author: Max Irwin
  * 
- * Lightears for speed/time.
+ * Copyright(c) 2014
  *
- * Sounds are interpreted by Galaxy radiation
+ * 
  *
  * ================================================================================= */
+ 
 var Thruxt = window.Thruxt = (function(thruxt){
 	"use strict";
 
 	thruxt = {};
 
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 	thruxt.create = function() {
 		var container = $("#container");
 		var game = thruxt.Game();
@@ -21,19 +25,23 @@ var Thruxt = window.Thruxt = (function(thruxt){
 		game.load();
 	};
 
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 	thruxt.load = function(){
 		var game = thruxt.Game();
 		game.load();
 	};
 
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 	thruxt.destroy = function() {
 		thruxt.Game.destroy();
 	};
 
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 	thruxt.save = function() {
 		thruxt.Game.save();
 	};
 
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 	thruxt.start = function(){
 		thruxt.create();
 		$.trigger("ready");

@@ -3,11 +3,13 @@ var Thruxt = window.Thruxt; if(typeof Thruxt !== 'object' ) throw new Error("Thr
 Thruxt.Starfield = (function() {
 	"use strict";
 
-	var colors = "efffef,efffef,efffef,efffef,efffef,efffef,efffef,efffef,efffef,9db4ff,aabfff,cad8ff,fbf8ff,fff4e8,ffddb4,ffbd6f,fff4e8,ffddb4,f84235,ba3059,605170"
-					.split(',')
-					.map(Thruxt.hex2three);
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+	// Possible Colors for Starfield
+	var colors="efffef,efffef,efffef,efffef,efffef,efffef,efffef,efffef,efffef,9db4ff,aabfff,cad8ff,fbf8ff,fff4e8,ffddb4,ffbd6f,fff4e8,ffddb4,f84235,ba3059,605170"
+				.split(',')
+				.map(Thruxt.hex2three);
 
-	//------------------------------------------------------------------
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 	//Draws a starfield
 	var StarField = function(scene,x,y,z,density) {
 		var self = this;
@@ -28,7 +30,8 @@ Thruxt.Starfield = (function() {
 	};
 
 
-
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+	// Draws a field of density stars at x/y/z
 	StarField.prototype.draw = function(x,y,density) {
 		var self = this;
 		var z = self.z;
@@ -42,8 +45,8 @@ Thruxt.Starfield = (function() {
 		for (var i=0; i<density; i++) {
 
 			var vertex = new THREE.Vector3();
-			vertex.x = x + (Math.random() * 2000 - 1000);
-			vertex.y = y + (Math.random() * 2000 - 1000);
+			vertex.x = x + (Math.random() * 20000 - 5000);
+			vertex.y = y + (Math.random() * 20000 - 5000);
 			vertex.z = z + (Math.random() * 2000 - 1000);
 
 			self.minx = Math.min(vertex.x,self.minx);
@@ -75,6 +78,9 @@ Thruxt.Starfield = (function() {
 
 	}
 
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+	// Triggered when the position event is fired
+	// Grows more stars if needed
 	StarField.prototype.position = function(data) {
 		var self = this;
 		if(data.y>self.maxy) {
@@ -83,6 +89,8 @@ Thruxt.Starfield = (function() {
 		}
 	};
 
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+	// Returns a new starfield by calling the constructor
 	var make = function(scene,x,y,z,density){
 		var starfield = new StarField(scene,x,y,z,density);
 		$.on("shipmove",function(e){ starfield.position(e.data); });

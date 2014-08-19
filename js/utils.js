@@ -13,7 +13,8 @@ var Thruxt = window.Thruxt; if(typeof Thruxt !== 'object' ) throw new Error("Thr
 	var _halfy   = thruxt.halfy      = _height / 2;
 
 	var _force  = thruxt.force     = 0.1;
-	var _theta  = thruxt.theta     = 0.001;
+	var _theta  = thruxt.theta     = 0.1;
+	var _zoom   = thruxt.zoom      = 5;
 
 
 	//------------------------------------------------------------------
