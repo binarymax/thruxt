@@ -8,6 +8,7 @@ Thruxt.Camera = (function() {
 	var Camera = function() {
 		var self = this;
 		var threecam = self.threecam = new THREE.PerspectiveCamera( 50, Thruxt.ratio, 1, 2400 );
+		var controls = self.controls = new THREE.FlyControls(threecam);
 		threecam.position.x = 0;
 		threecam.position.y = 0;
 		threecam.position.z = 1600;
@@ -25,11 +26,16 @@ Thruxt.Camera = (function() {
 	Camera.prototype.move = function(force) {
 		var self = this;
 		self.forcethrust+=force;
+		console.log(self.forcethrust);
 	};
 
 	Camera.prototype.position = function(force) {
 		var self = this;
 		self.threecam.position.y += self.forcethrust;
+		self.threecam.rotation.z += self.thetathrust;
+
+		$.trigger("shipmove",self.threecam.position);
+
 	};
 
 	var make = function() {

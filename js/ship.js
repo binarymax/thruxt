@@ -15,14 +15,29 @@ Thruxt.Ship = (function() {
 		self.forcethrust = 0;
 		self.thetathrust = 0
 
-		var map = THREE.ImageUtils.loadTexture( '/textures/water_over_coral_reef_303786.jpg' );
+		var layers = self.layers = [];
+
+		var map = THREE.ImageUtils.loadTexture( '/textures/clouds/turquois-opaque.jpg' );
 		map.wrapS = map.wrapT = THREE.RepeatWrapping;
 		map.anisotropy = 16;
 
 		var material = new THREE.MeshLambertMaterial( { ambient: 0xbbbbbb, map: map, side: THREE.DoubleSide } );
-		var object = self.object = new THREE.Mesh( new THREE.SphereGeometry( 40, 40, 40 ), material );
-		object.position.set( x, y, z );
-		scene.add(object);
+		self.layers.push(new THREE.Mesh( new THREE.SphereGeometry( 50, 40, 40 ), material ));
+		layers[0].position.set( x, y, z );
+		scene.add(layers[0]);
+
+
+
+
+		var map1 = THREE.ImageUtils.loadTexture('/textures/clouds/grey-waves.jpg');
+		map1.minFilter = map1.magFilter = THREE.LinearFilter;
+		map1.anisotropy = 4;
+
+		var material1 = new THREE.MeshBasicMaterial( { map: map1, blending: THREE.AdditiveBlending, depthTest: false, transparent: true } );
+		self.layers.push(new THREE.Mesh( new THREE.SphereGeometry( 55, 40, 40 ), material1 ));
+		layers[1].position.set( x, y, z );
+		scene.add(layers[1]);
+
 
 		var light = self.light = new THREE.DirectionalLight( 0xffffff );
 		light.position.set( 0, 0, 1 );
@@ -38,14 +53,18 @@ Thruxt.Ship = (function() {
 	Ship.prototype.move = function(force) {
 		var self = this;
 		self.forcethrust+=force;
+		//NEEDS TO BE A VECTOR
 	};
 
 	Ship.prototype.position = function() {
-		var timer = Date.now() * 0.0001;
 		var self = this;
-		self.object.position.y += self.forcethrust;
-		self.object.rotation.y = timer;
-
+		var layers = self.layers;
+		var timer = Date.now() * 0.0001;
+		for(var i=0;i<layers.length;i++) {
+			layers[i].position.y += self.forcethrust;
+			layers[i].rotation.y = timer  * ((i * 1.5) || 1);
+			//layers[i].rotation.y -= self.thetathrust * ((i * 1.00005) || 1);
+		}
 	}
 
 	var make = function(scene,x,y,z) {

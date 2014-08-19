@@ -12,9 +12,21 @@ Thruxt.Starfield = (function() {
 	var StarField = function(scene,x,y,z,density) {
 		var self = this;
 		self.scene = scene;
+		self.density = density;
 		self.z = z;
+
+		self.minx = 0;
+		self.miny = 0;
+
+		self.maxx = 0;
+		self.maxy = 0;
+
+		self.starsprite = THREE.ImageUtils.loadTexture('/textures/circle-white-24.png');
+
 		self.draw(x,y,density);
+
 	};
+
 
 
 	StarField.prototype.draw = function(x,y,density) {
@@ -34,17 +46,21 @@ Thruxt.Starfield = (function() {
 			vertex.y = y + (Math.random() * 2000 - 1000);
 			vertex.z = z + (Math.random() * 2000 - 1000);
 
+			self.minx = Math.min(vertex.x,self.minx);
+			self.miny = Math.min(vertex.y,self.miny);
+
+			self.maxx = Math.max(vertex.x,self.maxx);
+			self.maxy = Math.max(vertex.y,self.maxy);
+
 			geometry.vertices.push( vertex );
 
 		}
-
-		var sprite = THREE.ImageUtils.loadTexture('/textures/circle-white-24.png');
 
 		for (var i=0;i<12;i++) {
 			color = colors[Thruxt.rand1(colors.length)];
 			size  = Thruxt.rand2(1,12);
 
-			materials[i] = new THREE.PointCloudMaterial( { size: size, sizeAttenuation: false, map:sprite, transparent: true } );
+			materials[i] = new THREE.PointCloudMaterial( { size: size, sizeAttenuation: false, map:self.starsprite, transparent: true } );
 
 			materials[i].color = new THREE.Color(color[0], color[1], color[2]);
 
@@ -59,8 +75,18 @@ Thruxt.Starfield = (function() {
 
 	}
 
+	StarField.prototype.position = function(data) {
+		var self = this;
+		if(data.y>self.maxy) {
+			self.draw(data.x,data.y,self.density);
+			self.maxy = data.y+500;
+		}
+	};
+
 	var make = function(scene,x,y,z,density){
-		return new StarField(scene,x,y,z,density);
+		var starfield = new StarField(scene,x,y,z,density);
+		$.on("shipmove",function(e){ starfield.position(e.data); });
+		return starfield;
 	};
 
 	return make;
