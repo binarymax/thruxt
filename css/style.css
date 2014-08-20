@@ -1,4 +1,10 @@
-* { border-box:0;}
-body {margin:0;padding:0;overflow:hidden;}
+* { border-box:0;} body {margin:0;padding:0;overflow:hidden;}
+
 #stats {position:fixed;top:0;left:0;z-index:505;}
+
 #container {position:fixed;top:0;left:0;z-index:0;}
+
+#controls    {position:fixed;top:0;right:0;z-index:1010;border:0px;color:#fff;background-color:rgba(255,255,255,0.3);}
+#controls  fieldset { border:0px; }
+#controls label { margin-top:5px; margin-left:5px; }
+.control { margin-top:5px; margin-left:5px; width:50px;}

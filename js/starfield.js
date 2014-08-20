@@ -49,6 +49,12 @@ Thruxt.Starfield = (function() {
 			vertex.y = y + (Math.random() * 20000 - 5000);
 			vertex.z = z + (Math.random() * 2000 - 1000);
 
+			/*
+			vertex.x = x + Thruxt.rand1(50000)-10000;
+			vertex.y = y + Thruxt.rand1(50000)-10000;
+			vertex.z = Thruxt.rand2(1800,2400);
+			*/
+
 			self.minx = Math.min(vertex.x,self.minx);
 			self.miny = Math.min(vertex.y,self.miny);
 

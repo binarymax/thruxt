@@ -4,7 +4,7 @@ Thruxt.Game = (function() {
 	"use strict";
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-	//Constructor
+	// Constructor
 	var Game = function() {
 		var self = this;
 
@@ -20,17 +20,18 @@ Thruxt.Game = (function() {
 		self.stats = new Stats();
 		$("#stats").appendChild( self.stats.domElement );
 
+		Thruxt.Controls.desktop();
 
 	};
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-	//Plots a course
+	// Plots a course
 	var plot = Game.prototype.plot = function() {
 
 	};
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-	//Renders the scene
+	// Renders the scene
 	var render = Game.prototype.render = function() {
 		var self = this;
 		var camera = self.ship.camera;
@@ -47,7 +48,7 @@ Thruxt.Game = (function() {
 	};
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-	//Initializes a game
+	// Initializes a game
 	var load = Game.prototype.load = function(game) {
 		var self = this;
 

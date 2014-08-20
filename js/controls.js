@@ -4,15 +4,15 @@ Thruxt.Controls = (function() {
 	"use strict";
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-	//Stop Event Bubblicious
+	//Stop Event Bubblications
 	var nobubble = function(e) {
 		e.preventDefault();
-		e.stopPropagation();
+		//e.stopPropagation();
 		return false;
 	}
 
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-	//desktop controls
+	// =====================================================
+	// desktop controls
 	var desktop = function() {
 
 		var keypress = function(e) {
@@ -30,6 +30,7 @@ Thruxt.Controls = (function() {
 			}
 		};
 
+		// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		var scroll = function(e) {
             var dist = 0;
             if (e.wheelDelta) {
@@ -43,22 +44,34 @@ Thruxt.Controls = (function() {
 			nobubble(e);
 		};
 
+		// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		var databind = function(n){
+			var id   = n.getAttribute("id");
+			var name = n.getAttribute("name");
+			$("#"+id).on("change",function(e){
+				var data   = {};
+				data[name] = parseInt(n.value);
+				$.trigger(id,data);
+				console.log(data);
+			});
+		};
+
 		//Events
-		document.body.on("keydown",keypress);
-		//window.on("scroll",scroll);
 		window.on("mousewheel",scroll);
 		window.on("DOMMouseScroll",scroll);
 
-	};
-
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-	//touchpad controls
-	var touchpad = function() {
+		$(".control").forEach(databind);
+		document.body.on("keydown",keypress);
 
 	};
 
-	//Temp
-	desktop();
+	// =====================================================
+	// touchpad controls
+	var touch = function() {
+
+	};
+
+	return {desktop:desktop,touch:touch};
 
 
 })();
